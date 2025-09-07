@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AC Service & Repair</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background: white;
+      color: black;
+      display: flex;
+      justify-content: space-between;
+     align-items: center;
+      padding: 12px 20px;
+      position: relative;
+    }
+
+    nav .logo {
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+  
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+
+    /* Hamburger */
+    .menu-btn {
+      display: none;
+      font-size: 42px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: orange;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #0d47a1;
+        position: absolute;
+        top: 55px;
+        right: 0;
+        width: 200px;
+        padding: 15px;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: white no-repeat center/cover;
+      color: white;
+    }
+
+    header h2 {
+        color:black;
+      font-size: 34px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 5px white;
+    }
+
+    header p {
+           color:black;
+      font-size: 18px;
+      text-shadow: 1px 1px 3px white;
+    }
+
+    /* Services Section */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .service-box {
+      background: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .service-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-box img {
+      width: 130px;
+      height: 130px;
+      margin-bottom: 15px;
+    }
+
+    .service-box h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #0d47a1;
+    }
+
+    .service-box p {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .call-btn {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #0d47a1;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .call-btn:hover {
+      background: #1565c0;
+    }
+        .whatsapp-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #25D366;   /* WhatsApp green */
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s;
+  margin-left: 10px; /* Call Now ke side me gap */
+}
+
+.whatsapp-btn:hover {
+  background: #1ebe5d;
+}
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #0d47a1;
+      color: white;
+      margin-top: 30px;
+    }
+
+    /* Floating Buttons */
+    .floating-btns {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .floating-btns a {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .call-float {
+      background: #ff5722;
+    }
+
+    .whatsapp-float {
+      background: #25d366;
+    }
+
+   
+  .service-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .service-container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .service-container .line {
+    width: 50px;
+    height: 3px;
+    background-color: orange;
+    margin: 0 auto 20px;
+  }
+  .service-container img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    margin-left:220PX;
+
+</style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+  
+    <div class="logo">Star Refrigeration</div>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <ul id="menu">
+      <li><a href="#home" onclick="closeMenu()">Home</a></li>
+      <li><a href="#service-container" onclick="closeMenu()">Services</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header id="home">
+    <h2>Fast, Affordable, and Expert Home Appliance Repairs!
+
+</h2>
+    <p>Perfect Service offers reliable, fast, and professional repair solutions for all your<br> home appliances, ensuring quality service and customer satisfaction every time.</p>
+  </header>
+
+<!-- AC Service -->
+<!-- AC Service --> 
+<div class="service-box">
+  <img src="ac.JPEG" alt="AC Service">
+  <h3>Ac Repair Service & Installation</h3>
+  <p>We understand the urgency<br> of a malfunctioning AC,<br> especially during the<br> 
+scorching heat. Our quick<br> response team ensures that<br> we reach your doorstep<br> 
+promptly, ready to diagnose<br> and fix the problem..</p>
+  <a href="tel:9813956353" class="call-btn">Call Now</a>
+  <a href="https://wa.me/919813956353?text=Hello%20Perfect%20Service,%20I%20want%20to%20book%20AC%20Service" 
+     target="_blank" class="whatsapp-btn">Book now</a>
+</div>
+
+<!-- Washing Machine -->
+<div class="service-box">
+  <img src="wash.JPEG" alt="Washing Machine">
+  <h3>Washing Machine Repair Service</h3>
+  <p>We understand the<br> inconvenience a faulty<br> washing machine can cause.<br> Our rapid response team <br>ensures
+
+ that we reach your<br> doorstep promptly,<bR> equipped to assess and<br> resolve the problem<br> promptly..</p>
+  <a href="tel:9813956353" class="call-btn">Call Now</a>
+  <a href="https://wa.me/919813956353?text=Hello%20Perfect%20Service,%20I%20want%20to%20book%20Washing%20Machine%20Service" 
+     target="_blank" class="whatsapp-btn">Book now</a>
+</div>
+
+<!-- Refrigerator -->
+<div class="service-box">
+  <img src="fridge.JPEG" alt="Refrigerator">
+  <h3>Fridge Repair service</h3>
+  <p>We offer exceptional<br> Refrigerator Repair & Service<br> to ensure your fridge is in<br> top-notch condition. 
+
+Our<br> rapid response team ensures<br> that we reach your doorstep<br> quickly & fix your microwave<br> issues with precision</p>
+  <a href="tel:9813956353" class="call-btn">Call Now</a>
+  <a href="https://wa.me/919813956353?text=Hello%20Perfect%20Service,%20I%20want%20to%20book%20Refrigerator%20Service" 
+     target="_blank" class="whatsapp-btn">Book now</a>
+</div>
+
+<!-- RO Repair Service -->
+<div class="service-box">
+  <img src="ro.JPEG" alt="RO Service">
+  <h3>RO Repair Service</h3>
+  <p>Professional RO installation,<br> filter change and repair service<br> Our expert team ensures
+that we reach<BR> your doorstep
+swiftly, ready <br>to assess and
+resolve the<br> problem
+promptly..</p>
+  <a href="tel:9813956353" class="call-btn">Call Now</a>
+  <a href="https://wa.me/919813956353?text=Hello%20Perfect%20Service,%20I%20want%20to%20book%20RO%20Repair%20Service" 
+     target="_blank" class="whatsapp-btn">Book now</a>
+</div>
+
+<!-- Microwave -->
+<div class="service-box">
+  <img src="micro.JPEG" alt="Microwave">
+  <h3>Microwave Repair Service</h3>
+  <p>We specialize in Microwave<br> Repair & Service to bring the<br>warmth back to your kitchen.<br> Our expert 
+
+ team ensures<br> that we reach your doorstep<br> swiftly, ready to assess and<br> resolve the problem<br>promptly.</p>
+  <a href="tel:9813956353" class="call-btn">Call Now</a>
+  <a href="https://wa.me/919813956353?text=Hello%20Perfect%20Service,%20I%20want%20to%20book%20Microwave%20Repair" 
+     target="_blank" class="whatsapp-btn">Book now</a>
+</div>
+
+<!-- Geyser Repair Service -->
+<div class="service-box">
+  <img src="gas.JPEG" alt="Geyser Service">
+  <h3>Geyser Repair Service</h3>
+  <p>Fast geyser repair service with<br> genuine spare parts Our expert<BR> team ensures
+that we reach <BR>your doorstep
+swiftly, ready to assess<BR> and
+resolve the problem
+promptly..</p>
+  <a href="tel:9813956353" class="call-btn">Call Now</a>
+  <a href="https://wa.me/919813956353?text=Hello%20Perfect%20Service,%20I%20want%20to%20book%20Geyser%20Repair%20Service" 
+     target="_blank" class="whatsapp-btn">Book now</a>
+</div><!-- Why Choose Us Section -->
+<section id="why-choose-us" style="padding:60px 20px; background:#fff;">
+  <h2 style="text-align:center; font-size:28px; margin-bottom:40px; color:#333; font-family:'Segoe UI', sans-serif;">
+    Why Choose Us
+  </h2>
+
+  <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:25px; max-width:1100px; margin:0 auto;">
+
+    <!-- Box 1 -->
+    <div style="text-align:center; padding:20px; border-radius:10px; background:#f9f9f9; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <div style="font-size:45px; color:#ff6600; margin-bottom:15px;">🔧</div>
+      <h3 style="font-size:18px; color:#222; margin-bottom:10px;">Expert Technicians</h3>
+      <p style="color:#555; font-size:15px; line-height:1.6;">
+        Experienced & certified technicians skilled in repairing AC, refrigerator, washing machine & microwave.
+      </p>
+    </div>
+
+    <!-- Box 2 -->
+    <div style="text-align:center; padding:20px; border-radius:10px; background:#f9f9f9; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <div style="font-size:45px; color:#ff6600; margin-bottom:15px;">🚚</div>
+      <h3 style="font-size:18px; color:#222; margin-bottom:10px;">Prompt Service</h3>
+      <p style="color:#555; font-size:15px; line-height:1.6;">
+        Quick & reliable service with on-the-spot diagnostics and instant solutions for your appliances.
+      </p>
+    </div>
+
+    <!-- Box 3 -->
+    <div style="text-align:center; padding:20px; border-radius:10px; background:#f9f9f9; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <div style="font-size:45px; color:#ff6600; margin-bottom:15px;">₹</div>
+      <h3 style="font-size:18px; color:#222; margin-bottom:10px;">Transparent Pricing</h3>
+      <p style="color:#555; font-size:15px; line-height:1.6;">
+        No hidden charges! We provide fair & transparent quotes before starting any repair work.
+      </p>
+    </div>
+
+    <!-- Box 4 -->
+    <div style="text-align:center; padding:20px; border-radius:10px; background:#f9f9f9; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+      <div style="font-size:45px; color:#ff6600; margin-bottom:15px;">✔️</div>
+      <h3 style="font-size:18px; color:#222; margin-bottom:10px;">Quality & Guarantee Repairs</h3>
+      <p style="color:#555; font-size:15px; line-height:1.6;">
+        We use genuine spare parts with guarantee for long-lasting and efficient repairs.
+      </p>
+    </div>
+     </div>
+     </div>
+         <div class="service-container" id="service-container">
+  <h2>Services</h2>
+  <div class="line"></div>
+
+  <img src="ss.jpg" alt="AC Service">
+
+  <p>
+    Perfect Service is a heating and cooling service company with a history of excellence, 
+    customer service, and quality craftsmanship. We specialize in AC, Washing Machine, 
+    Refrigerator & Microwave service, replacement, and repair for both residential and 
+    commercial customers in Gurugram.
+  </p>
+</div>                         
+
+     <section style="background-color:#f5e6d3; padding:30px; text-align:center; font-family:'Segoe UI', sans-serif;">
+  <h2 style="color:#1a1a1a; margin-bottom:15px;">About Us</h2>
+  <p style="color:#2e2e2e; font-size:16px; line-height:1.6; text-align:justify; max-width:800px; margin:0 auto 20px auto;">
+    Welcome to <strong>Perfect Service</strong>, your ultimate destination for reliable, efficient, and professional 
+    home appliance repair solutions. We specialize in providing top-quality repair services for a wide range of 
+    appliances, ensuring that your household runs smoothly without interruptions. At Perfect Service, we take pride 
+    in our team of skilled technicians who are committed to delivering fast and effective solutions for all your 
+    appliance needs. Whether it’s a malfunctioning refrigerator, air conditioner, washing machine, or microwave, 
+    we have the expertise to get it working like new again.
+    <br><br>
+    Our mission is simple: to provide hassle-free, high-quality service that saves you time and money while guaranteeing 
+    customer satisfaction. With a focus on excellence and reliability, we’ve become a trusted name for appliance repairs, 
+    offering prompt response times and professional support. Choose Perfect Service for a seamless experience and a 
+    commitment to keeping your home running at its best!
+  </p>
+
+  <!-- Image -->
+  <div style="margin:20px 0;">
+    <img src="pp.PNG" alt="Technician at work" style="max-width:100%; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.2);">
+  </div>
+
+  <!-- WhatsApp Appointment Button -->
+  <a href="https://wa.me/919813956353?text=Hello%20Perfect%20Service,%20I%20want%20to%20book%20an%20appointment" 
+     target="_blank" 
+     style="display:inline-block; padding:12px 25px; font-size:18px; background-color:#25D366; color:#fff; text-decoration:none; border-radius:30px; font-weight:bold; box-shadow:0 4px 8px rgba(0,0,0,0.2);">
+     Book Appointment 
+  </a>
+</section>
+  
+</section>  <!-- Contact Section -->
+  <section id="contact" style="padding:40px; text-align:center;">
+    <h2>Contact Us</h2>
+    <p>Call us directly at <strong>9813956353</strong> or chat on WhatsApp!</p>
+  </section>
+  <section style="background-color:#f0f4f8; padding:40px 20px; text-align:center; font-family:'Segoe UI', sans-serif;">
+  <div style="background:#ffc8dd; display:inline-block; padding:20px 30px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.15);">
+    <h3 style="margin:0; font-size:22px; color:#1a1a1a; margin-bottom:10px;">📍 Our Address</h3>
+    <p style="margin:0; font-size:18px; color:#333;">
+      Sohna Gurgaon Road, Dhunela, Haryana 122103
+    </p>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <p>©<span style="color: orange; font-weight: bold;">Star Refrigeration</span>, All Right Reseved.<br> Designed By  
+<span style="color: orange; font-weight: bold;">Aakil Khan</span> </p>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <div class="floating-btns">
+    <a href="tel:9813956353" class="call-float">📞</a>
+    <a href="https://wa.me/919813956353" target="_blank" class="whatsapp-float">💬</a>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
+    }
+    function closeMenu() {
+      document.getElementById("menu").classList.remove("active");
+    }
+  </script>
+
+</body>
+</html>
