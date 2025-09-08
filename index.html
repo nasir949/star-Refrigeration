@@ -205,7 +205,7 @@
       font-size: 16px;
       font-weight: bold;
       border: none;
-      border-radius: 5px;
+      border-radius: px;
       cursor: pointer;
     }
     .form-container button:hover {
@@ -575,28 +575,33 @@ promptly..</p>
     function closeMenu() {
       document.getElementById("menu").classList.remove("active");
     }
- document.getElementById("serviceForm").addEventListener("submit", function(event){
-      event.preventDefault();
 
-      let name = document.getElementById("name").value;
-      let phone = document.getElementById("phone").value;
-      let address = document.getElementById("address").value;
-      let service = document.getElementById("service").value;
+  document.getElementById("serviceForm").addEventListener("submit", function(event){
+    event.preventDefault();
 
-      let whatsappMessage = *New Callback Request*%0A +
-                            Name: ${name}%0A +
-                            Phone: ${phone}%0A +
-                            Address: ${address}%0A +
-                            Service: ${service};
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let address = document.getElementById("address").value;
+    let service = document.getElementById("service").value;
 
-      let whatsappURL = https://wa.me/917206313373?text=${whatsappMessage};
-      window.open(whatsappURL, "_blank");
-    });
+    let whatsappMessage = `*New Callback Request*%0A` +
+                          `Name: ${name}%0A` +
+                          `Phone: ${phone}%0A` +
+                          `Address: ${address}%0A` +
+                          `Service: ${service}`;
+
+    // api.whatsapp.com ज्यादा compatible है
+    let whatsappURL = `https://api.whatsapp.com/send?phone=917206313373&text=${whatsappMessage}`;
+    
+    window.location.href = whatsappURL;
+  });
+
   </script>
 
 </body>
 
 </html>
+
 
 
 
