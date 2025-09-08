@@ -576,6 +576,7 @@ promptly..</p>
       document.getElementById("menu").classList.remove("active");
     }
 
+
   document.getElementById("serviceForm").addEventListener("submit", function(event){
     event.preventDefault();
 
@@ -584,23 +585,21 @@ promptly..</p>
     let address = document.getElementById("address").value;
     let service = document.getElementById("service").value;
 
-    let whatsappMessage = `*New Callback Request*%0A` +
-                          `Name: ${name}%0A` +
-                          `Phone: ${phone}%0A` +
-                          `Address: ${address}%0A` +
-                          `Service: ${service}`;
+    // Encode message properly
+    let whatsappMessage = *New Callback Request*\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nService: ${service};
+    let encodedMessage = encodeURIComponent(whatsappMessage);
 
-    // api.whatsapp.com ज्यादा compatible है
-    let whatsappURL = `https://api.whatsapp.com/send?phone=917206313373&text=${whatsappMessage}`;
-    
+    // Final WhatsApp URL
+    let whatsappURL = https://api.whatsapp.com/send?phone=917206313373&text=${encodedMessage};
+
     window.location.href = whatsappURL;
   });
-
   </script>
 
 </body>
 
 </html>
+
 
 
 
